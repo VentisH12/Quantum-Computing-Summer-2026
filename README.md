@@ -45,7 +45,7 @@ pip install numpy matplotlib qiskit qiskit-aer
 
 ## Step 1 — Qubits & Quantum Intuition
 
-📄 **Code:** [`week1/qubit_simulator.py`](week1/qubit_simulator.py)
+📄 **Code:** [`step1/qubit_simulator.py`](step1/qubit_simulator.py)
 
 **What the program demonstrates:** Pure-NumPy Qubit class, Bloch sphere plot, shot-based experiments, interference demo.
 
