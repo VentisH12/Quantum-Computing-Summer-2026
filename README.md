@@ -44,9 +44,9 @@ pip install numpy matplotlib qiskit qiskit-aer
 
 ## Step 1 — Qubits & Quantum Intuition
 
-📄 **Code:** [`week1/qubit_simulator.py`](week1/qubit_simulator.py)
+📄 **Code:** [`qubit_simulator.py`](qubit_simulator.py)
 
-### What We Did and Why
+### What I Did and Why
 
 The first step was to build a qubit simulator entirely from scratch using only NumPy — no Qiskit, no quantum libraries. The reason for this was deliberate: before trusting a framework to do quantum computation, it is important to understand what a qubit actually *is* at a mathematical level and to see that the "magic" of quantum behavior is really just linear algebra playing out on complex numbers.
 
@@ -165,7 +165,7 @@ This bar chart shows the results of running four different gate sequences on `|0
 
 ## Step 2 — Linear Algebra Foundations
 
-📄 **Code:** [`week2/tensor_visualizer.py`](week2/tensor_visualizer.py)
+📄 **Code:** [`tensor_visualizer.py`](tensor_visualizer.py)
 
 ### What We Did and Why
 
@@ -274,7 +274,7 @@ This three-panel plot shows the state `|+⟩⊗|0⟩` — qubit 0 in superpositi
 
 ## Step 3 — Quantum Gates & Circuits
 
-📄 **Code:** [`week3/circuit_simulator.py`](week3/circuit_simulator.py)
+📄 **Code:** [`circuit_simulator.py`](circuit_simulator.py)
 
 ### What We Did and Why
 
@@ -380,7 +380,7 @@ This heatmap shows the full 4×4 unitary matrix of the Bell-state circuit `(H⊗
 
 ## Step 4 — Early Quantum Algorithms
 
-📄 **Code:** [`week4/algorithms_qiskit.py`](week4/algorithms_qiskit.py)
+📄 **Code:** [`algorithms_qiskit.py`](algorithms_qiskit.py)
 
 ### What We Did and Why
 
@@ -525,7 +525,7 @@ This plot shows how the probability of measuring the target state changes as a f
 
 ## Step 5 — QFT & Shor's Algorithm
 
-📄 **Code:** [`week5/qft_shor.py`](week5/qft_shor.py)
+📄 **Code:** [`qft_shor.py`](qft_shor.py)
 
 ### What We Did and Why
 
@@ -626,7 +626,7 @@ This is what "QFT turns periodicity into peaks" looks like in practice. The sequ
 
 ## Step 6 — Entanglement & Quantum Protocols
 
-📄 **Code:** [`week6/teleportation_ecc.py`](week6/teleportation_ecc.py)
+📄 **Code:** [`teleportation_ecc.py`](teleportation_ecc.py)
 
 ### What We Did and Why
 
