@@ -89,7 +89,7 @@ Every single-qubit state can be visualized as a point on a unit sphere:
 Quantum measurement is inherently probabilistic. Running a circuit many times ("shots") builds up a frequency histogram that converges to the theoretical probabilities. A single shot gives one classical outcome; 1000 shots reveal the underlying probability distribution.
 
 ```
-Run:  python week1/qubit_simulator.py
+Run:  python qubit_simulator.py
 ```
 
 ---
