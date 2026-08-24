@@ -1,9 +1,10 @@
 """
-Week 1 — Qubit Simulator
+Step 1 — Qubit Simulator
 ========================
 Build a pure-Python qubit simulator with Hadamard gate and probabilistic measurement.
 Run:  python qubit_simulator.py
 Deps: numpy, matplotlib
+Author: Anand Cheruvu
 """
 
 import numpy as np
