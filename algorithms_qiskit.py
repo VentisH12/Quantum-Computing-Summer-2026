@@ -1,5 +1,5 @@
 """
-Week 4 — Deutsch–Jozsa & Grover's Search in Qiskit
+Step 4 — Deutsch–Jozsa & Grover's Search in Qiskit
 ====================================================
 Implements both algorithms using Qiskit Aer, with visualisation
 and a reusable oracle builder for Grover's search.
