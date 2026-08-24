@@ -1,5 +1,5 @@
 """
-Week 6 — Entanglement, Teleportation & Quantum Error Correction
+Step 6 — Entanglement, Teleportation & Quantum Error Correction
 ===============================================================
 Implements:
   - All four Bell states and their measurement
