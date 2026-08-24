@@ -1,2 +1,2 @@
 # Quantum-Computing-Summer-2026
-My learning and experimentation into the field of Quantum Computing.
+My learning and experimentation in the field of Quantum Computing.
