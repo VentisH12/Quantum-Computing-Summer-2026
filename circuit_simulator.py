@@ -1,5 +1,5 @@
 """
-Week 3 — 2-Qubit Circuit Simulator
+Step 3 — 2-Qubit Circuit Simulator
 ====================================
 A matrix-based 2-qubit circuit simulator with ASCII diagram printing,
 gate library, shot-based measurement, and state inspection.
