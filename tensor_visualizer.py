@@ -1,5 +1,5 @@
 """
-Week 2 — Linear Algebra & Tensor Product Visualizer
+Step 2 — Linear Algebra & Tensor Product Visualizer
 =====================================================
 Explore complex vectors, inner products, outer products,
 tensor products, and multi-qubit state visualisation.
