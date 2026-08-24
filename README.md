@@ -44,7 +44,7 @@ pip install numpy matplotlib qiskit qiskit-aer
 
 ## Step 1 — Qubits & Quantum Intuition
 
-📄 **Code:** [`week1/qubit_simulator.py`](week1/qubit_simulator.py)
+📄 **Code:** [`qubit_simulator.py`](qubit_simulator.py)
 
 **What the program demonstrates:** Pure-NumPy `Qubit` class, Bloch sphere visualisation, shot-based experiments, quantum interference demo.
 
@@ -108,7 +108,7 @@ Quantum measurement is inherently probabilistic. Running a circuit many times ("
 
 ## Step 2 — Linear Algebra Foundations
 
-📄 **Code:** [`week2/tensor_visualizer.py`](week2/tensor_visualizer.py)
+📄 **Code:** [`tensor_visualizer.py`](tensor_visualizer.py)
 
 **What the program demonstrates:** Tensor products, inner/outer products, Schmidt decomposition, entanglement entropy, partial trace, unitarity checks.
 
@@ -178,7 +178,7 @@ Tracing out one qubit of a Bell state gives the **maximally mixed state** `I/2` 
 
 ## Step 3 — Quantum Gates & Circuits
 
-📄 **Code:** [`week3/circuit_simulator.py`](week3/circuit_simulator.py)
+📄 **Code:** [`circuit_simulator.py`](circuit_simulator.py)
 
 **What the program demonstrates:** Full 2-qubit gate library, ASCII circuit diagrams, Bell state generation, SWAP decomposition via 3 CNOTs, phase kickback demo, circuit unitary inspection.
 
@@ -242,7 +242,7 @@ Any quantum circuit can be approximated to arbitrary accuracy using `{H, T, CNOT
 
 ## Step 4 — Early Quantum Algorithms
 
-📄 **Code:** [`week4/algorithms_qiskit.py`](week4/algorithms_qiskit.py)
+📄 **Code:** [`algorithms_qiskit.py`](algorithms_qiskit.py)
 
 **What the program demonstrates:** Deutsch–Jozsa oracle (all three types), Grover's search on 3- and 4-qubit registers, amplitude amplification sweep, scaling analysis table.
 
@@ -325,7 +325,7 @@ Each iteration amplifies the target amplitude sinusoidally. Going past the optim
 
 ## Step 5 — QFT & Shor's Algorithm
 
-📄 **Code:** [`week5/qft_shor.py`](week5/qft_shor.py)
+📄 **Code:** [`qft_shor.py`](qft_shor.py)
 
 **What the program demonstrates:** QFT built from scratch, FFT verification, QFT action on `|5⟩`, Shor's period-finding phase histogram for `a=7, N=15` yielding factors `3 × 5`.
 
@@ -392,7 +392,7 @@ The phase measurement peaks at `k/r` for integer `k`. For `r=4`, peaks appear at
 
 ## Step 6 — Entanglement & Quantum Protocols
 
-📄 **Code:** [`week6/teleportation_ecc.py`](week6/teleportation_ecc.py)
+📄 **Code:** [`teleportation_ecc.py`](teleportation_ecc.py)
 
 **What the program demonstrates:** All four Bell states with entropy verification, quantum teleportation with fidelity = 1.0 across 8 input states, 3-qubit bit-flip error correction with syndrome measurement achieving fidelity = 1.0 for all single-qubit errors.
 
