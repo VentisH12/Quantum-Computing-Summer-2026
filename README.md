@@ -96,7 +96,7 @@ Run:  python week1/qubit_simulator.py
 
 ## Step 2 — Linear Algebra Foundations
 
-📄 **Code:** [`week2/tensor_visualizer.py`](week2/tensor_visualizer.py)
+📄 **Code:** [`tensor_visualizer.py`](tensor_visualizer.py)
 
 **What the program demonstrates:** Tensor products, inner/outer products, Schmidt decomposition, entanglement entropy, partial trace, unitarity checks.
 
@@ -151,14 +151,14 @@ An entangled state **cannot** be written as `|ψ₁⟩ ⊗ |ψ₂⟩`. The Schmi
 - `S = 1` → maximally entangled (Bell state)
 
 ```
-Run:  python week2/tensor_visualizer.py
+Run:  python tensor_visualizer.py
 ```
 
 ---
 
 ## Step 3 — Quantum Gates & Circuits
 
-📄 **Code:** [`week3/circuit_simulator.py`](week3/circuit_simulator.py)
+📄 **Code:** [`circuit_simulator.py`](circuit_simulator.py)
 
 **What the program demonstrates:** Full 2-qubit gate library, ASCII circuit diagrams, Bell states, circuit unitarity inspection.
 
@@ -208,14 +208,14 @@ Any quantum circuit can be approximated to arbitrary accuracy using just `{H, T,
 When a control qubit is in superposition and the target eigenstate picks up a phase, that phase **"kicks back"** onto the control qubit. This is the core mechanism behind Deutsch–Jozsa and Shor's algorithm.
 
 ```
-Run:  python week3/circuit_simulator.py
+Run:  python circuit_simulator.py
 ```
 
 ---
 
 ## Step 4 — Early Quantum Algorithms
 
-📄 **Code:** [`week4/algorithms_qiskit.py`](week4/algorithms_qiskit.py)
+📄 **Code:** [`algorithms_qiskit.py`](algorithms_qiskit.py)
 
 **What the program demonstrates:** Deutsch–Jozsa oracle (all types), Grover's search with reusable oracle builder, amplitude amplification sweep chart, scaling analysis.
 
@@ -272,14 +272,14 @@ Each iteration **amplifies** the target's amplitude while cancelling others. Aft
 | 30 | ~1 billion | ~500M | 25,233 | ~19,812× |
 
 ```
-Run:  python week4/algorithms_qiskit.py
+Run:  python algorithms_qiskit.py
 ```
 
 ---
 
 ## Step 5 — QFT & Shor's Algorithm
 
-📄 **Code:** [`week5/qft_shor.py`](week5/qft_shor.py)
+📄 **Code:** [`qft_shor.py`](qft_shor.py)
 
 **What the program demonstrates:** QFT built from scratch, verification against numpy FFT, Shor's period-finding circuit, phase histogram, factoring N=15.
 
@@ -326,14 +326,14 @@ High-level steps:
 **Period finding** is the quantum core. The circuit prepares `Σₓ |x⟩|aˣ mod N⟩`, applies inverse QFT, and measures a phase that encodes `s/r` for some integer s. The **continued fractions algorithm** extracts r from the measured phase.
 
 ```
-Run:  python week5/qft_shor.py
+Run:  python qft_shor.py
 ```
 
 ---
 
 ## Step 6 — Entanglement & Quantum Protocols
 
-📄 **Code:** [`week6/teleportation_ecc.py`](week6/teleportation_ecc.py)
+📄 **Code:** [`teleportation_ecc.py`](teleportation_ecc.py)
 
 **What the program demonstrates:** All four Bell states, quantum teleportation with fidelity verification across multiple input states, superdense coding, 3-qubit bit-flip syndrome error correction code.
 
@@ -406,7 +406,7 @@ Syndrome table:
 The key insight: syndrome measurement reveals **which qubit** flipped without collapsing the logical superposition — it extracts error information while preserving quantum information.
 
 ```
-Run:  python week6/teleportation_ecc.py
+Run:  python teleportation_ecc.py
 ```
 
 ---
