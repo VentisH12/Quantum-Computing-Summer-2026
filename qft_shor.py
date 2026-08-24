@@ -1,5 +1,5 @@
 """
-Week 5 — Quantum Fourier Transform & Shor's Algorithm
+Step 5 — Quantum Fourier Transform & Shor's Algorithm
 ======================================================
 Build QFT from scratch, verify against numpy FFT,
 and implement the quantum period-finding subroutine.
