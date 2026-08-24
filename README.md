@@ -167,7 +167,7 @@ This bar chart shows the results of running four different gate sequences on `|0
 
 📄 **Code:** [`tensor_visualizer.py`](tensor_visualizer.py)
 
-### What We Did and Why
+### What I Did and Why
 
 Step 1 built intuition about what a qubit *is*. Step 2 builds the mathematical language needed to work with *multiple* qubits — and to understand why quantum computing becomes exponentially powerful as you add more of them.
 
@@ -276,7 +276,7 @@ This three-panel plot shows the state `|+⟩⊗|0⟩` — qubit 0 in superpositi
 
 📄 **Code:** [`circuit_simulator.py`](circuit_simulator.py)
 
-### What We Did and Why
+### What I Did and Why
 
 Steps 1 and 2 built the foundation: what a qubit is, how states are described mathematically, and how to combine multiple qubits. Step 3 puts that foundation to work by building a **full 2-qubit circuit simulator** — a system that can apply any sequence of gates to two qubits, draw the circuit as a diagram, and measure the result.
 
@@ -382,7 +382,7 @@ This heatmap shows the full 4×4 unitary matrix of the Bell-state circuit `(H⊗
 
 📄 **Code:** [`algorithms_qiskit.py`](algorithms_qiskit.py)
 
-### What We Did and Why
+### What I Did and Why
 
 This is the step where everything from the first three steps finally pays off. Steps 1–3 built the machinery — qubits, linear algebra, gates, circuits. Step 4 uses that machinery to implement the first real quantum algorithms: problems where a quantum computer provably outperforms any classical computer.
 
@@ -527,7 +527,7 @@ This plot shows how the probability of measuring the target state changes as a f
 
 📄 **Code:** [`qft_shor.py`](qft_shor.py)
 
-### What We Did and Why
+### What I Did and Why
 
 This is the most mathematically advanced step — and arguably the most consequential in terms of real-world impact. Step 5 implements the **Quantum Fourier Transform (QFT)** from scratch and uses it to demonstrate the core of **Shor's algorithm**: the quantum method for factoring large integers that, if run on a large enough quantum computer, would break most of the encryption protecting the internet today.
 
@@ -628,7 +628,7 @@ This is what "QFT turns periodicity into peaks" looks like in practice. The sequ
 
 📄 **Code:** [`teleportation_ecc.py`](teleportation_ecc.py)
 
-### What We Did and Why
+### What I Did and Why
 
 The final step brings together everything learned in Steps 1–5 and uses it to implement three protocols that have no equivalent in classical computing. Each one exploits entanglement in a different way, and each one teaches something fundamental about the nature of quantum information.
 
