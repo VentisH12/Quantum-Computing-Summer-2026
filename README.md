@@ -62,7 +62,7 @@ Mathematically:
 |ψ⟩ = α|0⟩ + β|1⟩
 ```
 
-Here α and β are complex numbers whose squares tell you the probabilities: `|α|²` is the chance of getting 0, and `|β|²` is the chance of getting 1. They must always add up to 1 (you always get *some* answer). This rule — probability from squared amplitude — is called the **Born rule**.
+Here α and β are complex numbers whose squared magnitudes tell you the probabilities: `|α|²` is the chance of getting 0, and `|β|²` is the chance of getting 1. They must always add up to 1 (you always get *some* answer). This rule — probability from squared amplitude — is called the **Born rule**.
 
 #### What is a quantum gate?
 
@@ -159,7 +159,7 @@ This bar chart shows the results of running four different gate sequences on `|0
 
 **`X|0⟩` — NOT gate:** The orange bar is 1.000, purple is 0.000. The X gate is simply a bit flip: it turns `|0⟩` into `|1⟩` with certainty. Deterministic, classical-like behavior.
 
-**`H·Z·H|0⟩` — Sandwiched Z gate:** Again, 0.000 / 1.000 — always measures 1. This one is more subtle. The Z gate flips the *phase* of the `|1⟩` component (`+` becomes `−`) but does nothing visible if you measure immediately. However, sandwiching it between two Hadamard gates converts that invisible phase flip into a visible bit flip. This demonstrates **phase kickback** in its simplest form: the Z gate acts invisibly in the computational basis, but the Hadamard gates on either side translate its effect into something measurable. This same principle underlies Deutsch–Jozsa and Shor's algorithm — it is one of the deepest ideas in quantum computing, appearing here in its simplest form.
+**`H·Z·H|0⟩` — Sandwiched Z gate:** Again, 0.000 / 1.000 — always measures 1. This one is more subtle. The Z gate flips the *phase* of the `|1⟩` component (`+` becomes `−`) but does nothing visible if you measure immediately. However, sandwiching it between two Hadamard gates converts that invisible phase flip into a visible bit flip (`HZH = X`). This is a **change of basis**: the Z gate acts invisibly in the computational basis, but the Hadamard gates on either side translate its effect into something measurable. It is the single-qubit cousin of **phase kickback** (a controlled gate whose target sits in an eigenstate pushes a phase onto the control qubit), which is covered in Step 3 and underlies Deutsch–Jozsa and Shor's algorithm.
 
 ---
 
@@ -232,11 +232,11 @@ This heatmap shows the 4×4 matrix representing the gate `H⊗I` — Hadamard on
 
 **What to notice:**
 
-The matrix has a clear **block structure**: the top-left and top-right 2×2 blocks both contain the Hadamard pattern (`0.707, 0.707, 0.707, -0.707`), while qubit 1 is left untouched (its dimension just repeats the pattern). This block structure is the visual signature of a tensor product gate — the Hadamard "lives in" the qubit 0 subspace and the identity "lives in" the qubit 1 subspace, and they do not interact.
+The matrix has a clear **block structure**, but it is built from *identity* blocks, not Hadamard blocks. Written as four 2×2 blocks, `H⊗I = (1/√2)·[[I, I], [I, −I]]`: the top-left, top-right and bottom-left blocks are `+0.707·I`, and the bottom-right block is `−0.707·I`. The Hadamard pattern (`+ + / + −`) shows up only at the *coarse* level, in the signs of the four blocks, while inside every block qubit 1 is untouched (an identity). Consequently only 8 of the 16 entries are nonzero (all with magnitude 0.707), and the other 8 are exactly zero. This block structure is the visual signature of a tensor product gate — the Hadamard "lives in" the qubit 0 subspace (it sets the block signs) and the identity "lives in" the qubit 1 subspace (it fills each block), and they do not interact.
 
-The phase panel is uniformly zero (blue) everywhere except for one entry, which is `π` (red) — corresponding to the `−1/√2` entry of the Hadamard matrix. This confirms the gate is real-valued with one sign flip, exactly as expected.
+The phase panel is zero (blue) for every nonzero entry except two, which are `π` (red): the two diagonal entries of the bottom-right block, corresponding to the `−1/√2` entries of `H⊗I`. This confirms the gate is real-valued, with sign flips only in that block, exactly as expected.
 
-**Key takeaway:** Tensor product gates are block-structured. When you see that block pattern in a matrix heatmap, you know the gate is separable — it acts independently on each qubit with no entanglement between them.
+**Key takeaway:** Tensor product gates are block-structured. For `H⊗I`, the outer 2×2 pattern comes from H and the identity fills each block, so the matrix is sparse (8 zeros). When you see this Kronecker block pattern in a matrix heatmap, you know the gate is separable — it acts independently on each qubit and cannot create entanglement from a product state.
 
 ---
 
@@ -252,7 +252,7 @@ This three-panel plot shows the state `|Φ⁺⟩ = (|00⟩ + |11⟩)/√2` — t
 
 **Right panel — Probability heatmap:** The 2×2 grid has probability 0.5 in the top-left (`|00⟩`) and bottom-right (`|11⟩`) corners, and zero in the other two corners. This checkerboard-like diagonal pattern is the visual signature of a maximally entangled state. A product state would show a smooth, non-diagonal distribution.
 
-**Key takeaway:** The Bell state's probability heatmap has a distinctive diagonal pattern — only correlated outcomes appear. This cannot be produced by any pair of independent qubits, which is the mathematical definition of entanglement.
+**Key takeaway:** The Bell state's probability heatmap has a distinctive diagonal pattern — only correlated outcomes appear. No pair of independent qubits can produce this: a product state's probability grid always factors as `P(q₀) × P(q₁)`, and a grid with weight only on `|00⟩` and `|11⟩` does not factor.
 
 ---
 
@@ -262,13 +262,13 @@ This three-panel plot shows the state `|Φ⁺⟩ = (|00⟩ + |11⟩)/√2` — t
 
 This three-panel plot shows the state `|+⟩⊗|0⟩` — qubit 0 in superposition, qubit 1 fixed at 0. This is a **separable** (non-entangled) state with entanglement entropy = 0.
 
-**Left panel — Probability bars:** All four basis states have nonzero probability: `|00⟩ = 0.5`, `|01⟩ = 0`, `|10⟩ = 0.5`, `|11⟩ = 0`. Wait — `|01⟩` and `|11⟩` are zero. This makes sense: qubit 1 is always `|0⟩`, so any outcome with qubit 1 = 1 has zero probability. Qubit 0 is in `|+⟩` superposition, so outcomes with qubit 0 = 0 and qubit 0 = 1 are equally likely.
+**Left panel — Probability bars:** Only two basis states have nonzero probability: `|00⟩ = 0.5` and `|10⟩ = 0.5`, while `|01⟩ = 0` and `|11⟩ = 0`. This makes sense: qubit 1 is always `|0⟩`, so any outcome with qubit 1 = 1 has zero probability. Qubit 0 is in `|+⟩` superposition, so outcomes with qubit 0 = 0 and qubit 0 = 1 are equally likely.
 
-**Middle panel — Phase diagram:** Both arrows for `|00⟩` and `|10⟩` point along the positive real axis at the same length, just as in the Bell state. But notice that *both* are in the same two states — qubit 1 never appears as 1. The phase structure confirms this is a real-valued product state with no complex phases.
+**Middle panel — Phase diagram:** Both arrows, for `|00⟩` and `|10⟩`, point along the positive real axis at the same length, just as in the Bell state, but here only these two states carry amplitude — qubit 1 never appears as 1. The phase structure confirms this is a real-valued product state with no complex phases.
 
 **Right panel — Probability heatmap:** Compare this to the Bell state heatmap: instead of a diagonal pattern, we now see a **column pattern** — the left column (`q₁=0`) has probability 0.5 in both rows, and the right column (`q₁=1`) is entirely zero. This column structure shows that qubit 1's state is completely independent of qubit 0 — exactly what "product state" means. You could factor the full joint description into `P(q₀) × P(q₁)` separately.
 
-**Key takeaway:** The contrast between these two heatmaps is one of the clearest visual demonstrations of what entanglement *is*. Product states have column/row patterns (factorizable). Entangled states have diagonal or off-diagonal patterns (non-factorizable). The Bell state heatmap simply cannot be explained by two independent coins.
+**Key takeaway:** The contrast between these two heatmaps is a clear visual demonstration of what entanglement *is*. Product states have probability grids that factor into a row pattern times a column pattern (here, a single column). The Bell state's diagonal grid cannot be factored, so it cannot be explained by two independent coins. One caution: probabilities alone cannot certify entanglement — some entangled states have perfectly uniform probability grids (see Step 3, Plot 1), and only the phases reveal it.
 
 ---
 
@@ -282,7 +282,7 @@ Steps 1 and 2 built the foundation: what a qubit is, how states are described ma
 
 The purpose of building this from scratch rather than just using Qiskit is the same as before: you understand something much more deeply when you implement it yourself. Every gate in this simulator is a real matrix multiplication. The circuit diagram is generated from the actual sequence of operations. The measurement statistics come from genuine probabilistic sampling. There is no black box.
 
-This step also demonstrates two ideas that bridge from bare gates to actual algorithms: **SWAP decomposition** (showing that complex gates can always be broken down into simpler ones) and **phase kickback** (the mechanism that almost every quantum speedup relies on).
+This step also demonstrates two ideas that bridge from bare gates to actual algorithms: **SWAP decomposition** (showing that complex gates can always be broken down into simpler ones) and **phase kickback** (a mechanism that many quantum speedups rely on, including Deutsch–Jozsa and phase estimation).
 
 #### What is a quantum circuit?
 
@@ -322,7 +322,7 @@ This matters because real quantum hardware often has limited connectivity — no
 
 This is one of the most important and counterintuitive ideas in quantum computing. When a controlled gate acts on a *target qubit that is in an eigenstate* of that gate, the eigenvalue (the phase associated with that eigenstate) transfers — "kicks back" — onto the control qubit.
 
-The clearest demonstration: `H → Z → H` on a single qubit. The Z gate flips phase, but you cannot see a phase flip if you measure immediately. However, the H gates on either side translate the phase flip into a bit flip — the qubit that started as `|0⟩` ends up as `|1⟩`. The Z gate did its work invisibly in the superposition basis, and the H gates made it visible. This exact mechanism is what lets Deutsch–Jozsa solve its problem in one query, and what gives Shor's algorithm its power.
+The clearest example: a CNOT whose target is in the `|−⟩` state. `|−⟩` is an eigenstate of X with eigenvalue −1, so `CNOT|x⟩|−⟩ = (−1)^x |x⟩|−⟩` — the target is unchanged, but the control picks up a phase of −1 whenever it is `|1⟩`. Putting the control in superposition `|+⟩` therefore turns it into `|−⟩`: the phase "kicked back" onto the control and became visible after one more Hadamard. A closely related single-qubit trick is `H → Z → H`: the Z gate flips phase, which you cannot see if you measure immediately, but the H gates on either side translate that phase flip into a bit flip (`HZH = X`), so a qubit that started as `|0⟩` ends up as `|1⟩`. Both examples use the same idea — phases are invisible until a Hadamard converts them into amplitudes — and it is this idea that lets Deutsch–Jozsa solve its problem in one query and that drives phase estimation inside Shor's algorithm.
 
 #### What does "universal gate set" mean?
 
@@ -346,21 +346,21 @@ A universal gate set is a small collection of gates that can, in combination, ap
 
 ### Output Analysis
 
-#### Plot 1 — Bell Circuit Output (H → CNOT → H)
+#### Plot 1 — Interference Circuit Output (H → CNOT → H)
 
 ![Bell Circuit Output](images/step3_bell_circuit_output.png)
 
-This three-panel plot shows the output of an interference circuit: Hadamard on q0, CNOT, then Hadamard on q0 again. Starting from `|00⟩`, this produces a *uniform superposition* of all four 2-qubit basis states.
+This three-panel plot shows the output of an interference circuit: Hadamard on q0, CNOT, then Hadamard on q0 again (note this is the Bell circuit with an extra final H, so it does *not* produce a Bell state). Starting from `|00⟩`, the final state is `½(|00⟩ + |01⟩ + |10⟩ − |11⟩)`: all four basis states are equally likely, but the `|11⟩` amplitude is `−½` while the other three are `+½`.
 
 **Left panel — Probability bars:** All four states (`|00⟩`, `|01⟩`, `|10⟩`, `|11⟩`) are equally likely at exactly 0.250 each. The dotted line marks the uniform distribution `1/4`. Every bar hits it precisely.
 
-This result is interesting because it shows how interference can be used to *spread* probability uniformly — the same mechanism that Grover's algorithm starts with. Before Grover amplifies the target, it first needs this uniform superposition as its starting point.
+Equal probabilities do not mean equal amplitudes. The three-H-and-CNOT sequence spreads probability uniformly, but it is *not* the uniform superposition `|+⟩⊗|+⟩ = H⊗H|00⟩` that Grover's algorithm starts from (that state has all four amplitudes `+½`). The two states are indistinguishable in the probability bars and differ only in the sign on `|11⟩`.
 
-**Middle panel — Phase diagram:** All four amplitudes are real and equal at `0.5`, pointing in the same direction along the positive real axis. No phases are different from each other. This is a "flat" state — maximum uncertainty, no structure, maximum entropy.
+**Middle panel — Phase diagram:** All four amplitudes are real with the same magnitude, `0.5`, but they do not all point the same way. Three arrows (`|00⟩`, `|01⟩`, `|10⟩`) point along the positive real axis (phase 0), and the `|11⟩` arrow points the opposite way along the negative real axis (phase `π`, amplitude `−0.5`). This relative sign is invisible in the probability bars, yet it matters: it makes the state `CZ|++⟩`, which is maximally entangled (its 2×2 amplitude matrix `½[[1, 1], [1, −1]]` has rank 2 and entanglement entropy 1), whereas `|+⟩⊗|+⟩` is a product state.
 
 **Right panel — Shot-based histogram (1024 shots):** The four outcome counts are nearly equal, with small fluctuations from random sampling. This is what 1024 coin flips across four outcomes looks like. The slight unevenness is expected statistical noise — with infinite shots, all four would converge to exactly 0.25.
 
-**Key takeaway:** The circuit `H → CNOT → H` acts as a 2-qubit "scrambler" — it takes a definite starting state and distributes probability equally across all four possibilities. This is the quantum analogue of randomizing.
+**Key takeaway:** The circuit `H → CNOT → H` produces equal measurement probabilities (0.25 each) from a definite starting state, but it is not simply "randomizing": the sign on `|11⟩` makes the output a maximally entangled state. Probability bars alone cannot tell this state apart from the unentangled `|+⟩⊗|+⟩`; the phase panel can.
 
 ---
 
@@ -368,13 +368,13 @@ This result is interesting because it shows how interference can be used to *spr
 
 ![Circuit Unitary](images/step3_circuit_unitary.png)
 
-This heatmap shows the full 4×4 unitary matrix of the Bell-state circuit `(H⊗I) · CNOT`. The left panel is magnitudes; the right panel is phases.
+This heatmap shows the full 4×4 unitary matrix of the Bell-state circuit `(H⊗I) · CNOT`. The left panel is magnitudes; the right panel is phases. (For comparison, the three-gate circuit from Plot 1, `(H⊗I)·CNOT·(H⊗I)`, would have all 16 entries at magnitude 0.5.)
 
-**Left panel — Magnitudes:** Every entry in the matrix has the same magnitude: `0.71 ≈ 1/√2`. The matrix is completely "flat" in terms of magnitude — no entry is more important than any other. This is the signature of a circuit that spreads probability uniformly, which is exactly what we saw in the output.
+**Left panel — Magnitudes:** The matrix is *sparse*, not flat. Exactly 8 of the 16 entries have magnitude `0.71 ≈ 1/√2`, and the other 8 are exactly zero; every row and every column contains exactly two nonzero entries. The zero pattern is the fingerprint of CNOT's routing combined with the Hadamard on qubit 0: each input basis state is sent to a superposition of just two output states, not all four.
 
-**Right panel — Phases:** This is where the structure lives. The phases are not all the same — some entries are 0 (blue) and some are `π` (red, meaning a sign of `−1`). The specific pattern of phases determines exactly which quantum states interfere constructively and which interfere destructively. Change even one phase and the circuit produces a completely different output.
+**Right panel — Phases:** This is where the signs live. Among the 8 nonzero entries, six have phase 0 (blue) and exactly two have phase `π` (red, meaning a sign of `−1`); the zero entries carry no meaningful phase. The specific placement of those two minus signs determines which quantum states interfere constructively and which destructively. Move even one and the circuit produces a different output.
 
-**Key takeaway:** In quantum computing, magnitude tells you *how much* of each state is present; phase tells you *how those states will interfere*. The magnitude panel looks uniform and featureless, but the phase panel contains the real computational content of the circuit. This is why phase is so important — and why it is so easy to underestimate.
+**Key takeaway:** In quantum computing, magnitude tells you *how much* of each state is present; phase tells you *how those states will interfere*. Here the magnitude panel shows which input–output pairs are connected at all (a sparse pattern), while the phase panel carries the signs that decide how amplitudes combine when this gate is followed by others. This is why phase is so important — and why it is so easy to underestimate.
 
 ---
 
@@ -410,7 +410,7 @@ The phase flip is invisible to a single measurement, but when combined with inte
 
 **The problem:** You are given a function that takes n-bit inputs and outputs either 0 or 1. You are promised it is one of two types: *constant* (always outputs the same answer regardless of input) or *balanced* (outputs 0 for exactly half the inputs and 1 for the other half). Which type is it?
 
-**Classically:** In the worst case, you need to check `2ⁿ⁻¹ + 1` inputs before you can be certain. For n=100, that is more than a billion-trillion queries.
+**Classically:** In the worst case, you need to check `2ⁿ⁻¹ + 1` inputs before you can be certain. For n=100, that is about 6 × 10²⁹ queries.
 
 **Quantum:** Exactly **one query**, always. Regardless of n.
 
@@ -479,7 +479,7 @@ This bar chart shows the measurement distribution after running Grover's algorit
 
 **The dominant bar:** `|101⟩` towers above all other outcomes with close to 95% probability. The 7 other possible answers each have tiny residual probabilities (around 1% each) — the amplitude amplification process was not quite perfect (2 iterations is optimal but not exact for n=3), so a small amount of probability leaked into the wrong answers.
 
-**Classical comparison:** Without Grover, each of the 8 items would have 12.5% probability. You would need on average 4 queries. Grover found the answer in 2 queries with 95% confidence — a nearly 2× speedup for this small example. The speedup becomes dramatically larger at scale (see the scaling table above).
+**Classical comparison:** Without Grover, each of the 8 items would have 12.5% probability. You would need on average 4 queries. Grover found the answer in 2 queries with 95% confidence — a nearly 2× speedup for this small example. The speedup becomes dramatically larger at scale (see the billion-item example above).
 
 **Key takeaway:** This plot visually captures amplitude amplification. The "winner" bar is roughly 7.5× taller than it would be under uniform distribution — that height is built up over 2 rounds of oracle-then-diffusion, each round boosting the target at the expense of all others.
 
@@ -493,7 +493,7 @@ This plot shows Grover's algorithm on 4 qubits (16 items) searching for *two* si
 
 **Two spikes:** Both target states rise to high probability after 2 iterations. The other 14 states each have near-zero probability. Grover's algorithm works for multiple targets — when there are M targets in N items, the optimal number of iterations becomes `~π√(N/M)/4`, which is fewer rounds because there are more "winning" states to amplify.
 
-**Interesting asymmetry:** The two targets may not be exactly equal in probability due to finite-shot statistical noise (this was measured with 4096 shots, and both targets were about 40–45% each, totaling ~85–90% combined).
+**Interesting asymmetry:** The two targets may not be exactly equal in probability due to finite-shot statistical noise (this was measured with 4096 shots). Theory predicts about 94.5% combined success after 2 iterations — the same rotation angle as the 3-qubit case, since `sin θ = √(M/N) = √(2/16) = 1/√8`, giving `P = sin²(5θ) ≈ 0.945` — so each target should land near 47%, with the other 14 states sharing the remaining ~5.5%.
 
 **Key takeaway:** Grover is not limited to a single target. Any subset of "marked" items can be searched simultaneously, and the speedup scales as `O(√(N/M))` — still quadratic in the ratio of total to marked items.
 
@@ -514,7 +514,7 @@ This plot shows how the probability of measuring the target state changes as a f
 - At **k=0** (no iterations, just uniform superposition): probability is `1/8 = 0.125` — the baseline classical random chance
 - At **k=1**: probability rises to ~0.78 — already much better than classical
 - At **k=2** (optimal): probability peaks at ~0.95 — this is the best the algorithm can do in 2 steps
-- At **k=3 and beyond**: the probability *drops* — the algorithm has "overshot" and the amplitudes are now rotating past the target. If you run too many iterations, you actually make things worse.
+- At **k=3**: the probability *drops* to ~0.33 — the algorithm has "overshot" and the amplitudes are rotating past the target. The curve keeps oscillating (about 0.01 at k=4, then rising again), so if you run too many iterations you can make things much worse.
 - The green dashed vertical line marks the optimal stopping point at k=2
 
 **The red dotted horizontal line** at `1/8` marks the classical random-search baseline. Everything above this line is the quantum advantage.
@@ -543,11 +543,11 @@ The classical Discrete Fourier Transform (DFT) does this for lists of numbers. T
 
 The classical Fast Fourier Transform (FFT) on N numbers needs `O(N log N)` operations. For N = 2ⁿ numbers, that is `O(n · 2ⁿ)` operations — it grows exponentially with the number of qubits n.
 
-The QFT needs only `O(n²)` gates — a Hadamard and some controlled phase rotations per qubit. For n=3, that is 9 operations instead of 24. For n=50, it is 2500 operations instead of 56 trillion. This exponential advantage is real, but it comes with a catch: you cannot directly read out the Fourier coefficients (measurement collapses the state). The QFT is useful only when the Fourier information is encoded in *measurement probabilities* — exactly what Shor's algorithm exploits.
+The QFT needs only `O(n²)` gates — a Hadamard and some controlled phase rotations per qubit. For n=3, that is on the order of 9 operations instead of 24. For n=50, it is on the order of 2500 operations instead of about 56 quadrillion (`50 · 2⁵⁰ ≈ 5.6 × 10¹⁶`). This exponential advantage is real, but it comes with a catch: you cannot directly read out the Fourier coefficients (measurement collapses the state). The QFT is useful only when the Fourier information is encoded in *measurement probabilities* — exactly what Shor's algorithm exploits.
 
 #### What is Shor's algorithm, in plain English?
 
-**The problem:** Given a large number N (say, a 2048-bit RSA key — a number with 617 digits), find its prime factors. This is believed to be classically hard: the best classical algorithms take time that grows exponentially with the number of digits.
+**The problem:** Given a large number N (say, a 2048-bit RSA key — a number with 617 digits), find its prime factors. This is believed to be classically hard: the best classical algorithms take super-polynomial (sub-exponential) time in the number of digits.
 
 **Why it matters:** RSA encryption (used to secure bank transactions, email, HTTPS) relies on the fact that multiplying two large primes is easy but factoring the result is practically impossible. Shor's algorithm breaks this assumption — on a large enough quantum computer, it can factor in polynomial time.
 
@@ -618,7 +618,7 @@ This two-panel plot shows the measurement results from Shor's period-finding cir
 
 This is what "QFT turns periodicity into peaks" looks like in practice. The sequence `7ˣ mod 15` has period 4. The circuit put all exponents into superposition, computed the sequence, and applied the inverse QFT. The QFT detected the periodicity and converted it into four measurement spikes spaced exactly `1/4` apart on the phase axis. Nothing in between has any probability — all that amplitude was cancelled by destructive interference.
 
-**Right panel — Top measured phases:** The 8 most-likely measurement outcomes are shown as a horizontal bar chart. The top four bars correspond to phase values `0/256, 64/256, 128/256, 192/256` — which simplify to `0, 1/4, 1/2, 3/4`. These are exactly the four expected peaks. The continued fractions algorithm takes any one of these measurements (say `64/256 = 1/4`), finds the best rational approximation with a small denominator, and extracts `r = 4` from the denominator.
+**Right panel — Top measured phases:** The 8 most-likely measurement outcomes are shown as a horizontal bar chart. The top four bars correspond to phase values `0/256, 64/256, 128/256, 192/256` — which simplify to `0, 1/4, 1/2, 3/4`. These are exactly the four expected peaks. The continued fractions algorithm takes a measurement such as `64/256 = 1/4` (or `192/256 = 3/4`), finds the best rational approximation with a small denominator, and extracts `r = 4` from the denominator. Not every peak is useful: a measurement of `0` carries no information, and `128/256 = 1/2` only suggests `r = 2`, which fails the check `7² ≡ 1 (mod 15)`, so that run is simply repeated.
 
 **Key takeaway:** The histogram is almost entirely blank with four sharp spikes. That sparseness is the quantum advantage. A classical computer would need to compute the sequence `7¹, 7², ..., 7ⁿ mod 15` one by one and look for a repeat — potentially many operations. The quantum circuit "asked" the QFT to find the period across all exponents simultaneously, and the periodicity was revealed directly in the measurement distribution. From the peak at `64/256 = 1/4`, we extract r=4, then compute `GCD(48,15) = 3` and `GCD(50,15) = 5`, and the factorization `15 = 3 × 5` is complete.
 
@@ -709,7 +709,7 @@ If one physical qubit flips (say qubit 1: `α|010⟩ + β|101⟩`), the syndrome
 
 This 2×2 grid shows measurement histograms for all four Bell states, each measured 4096 times. The x-axis of each panel is the 4 possible measurement outcomes (`|00⟩`, `|01⟩`, `|10⟩`, `|11⟩`); the y-axis is the probability of each outcome.
 
-**`|Φ⁺⟩` (top-left):** Only `|00⟩` and `|11⟩` appear, each at ~0.5. The two qubits are *always in agreement* — both 0 or both 1. The correlated outcomes (`|01⟩` and `|10⟩`) have exactly zero probability.
+**`|Φ⁺⟩` (top-left):** Only `|00⟩` and `|11⟩` appear, each at ~0.5. The two qubits are *always in agreement* — both 0 or both 1. The anti-correlated outcomes (`|01⟩` and `|10⟩`) have exactly zero probability.
 
 **`|Φ⁻⟩` (top-right):** Identical distribution to `|Φ⁺⟩` — still 50/50 between `|00⟩` and `|11⟩`. You cannot tell `|Φ⁺⟩` from `|Φ⁻⟩` in the computational basis! The difference is entirely in the phase (the minus sign in front of `|11⟩`), which is invisible to direct measurement but determines how the state interferes with other operations. This is a concrete reminder that *phase matters*.
 
@@ -717,7 +717,7 @@ This 2×2 grid shows measurement histograms for all four Bell states, each measu
 
 **`|Ψ⁻⟩` (bottom-right):** Again identical distribution to `|Ψ⁺⟩` — same anti-correlation pattern, phase difference invisible in measurement.
 
-**Key takeaway:** The four Bell states form two pairs that look identical when measured, but are physically distinct because of their phases. They are the four "directions" of maximal 2-qubit entanglement. The fact that you cannot distinguish `Φ⁺` from `Φ⁻` by direct measurement is not a flaw — it is the mechanism that makes quantum cryptography and teleportation secure and functional.
+**Key takeaway:** The four Bell states form two pairs that look identical when measured in the computational basis, but are physically distinct because of their phases. They are the four "directions" of maximal 2-qubit entanglement. That `Φ⁺` and `Φ⁻` cannot be told apart by a direct computational-basis measurement is a reminder that phase matters; telling them apart requires a joint measurement in the Bell basis (a CNOT followed by a Hadamard), which is exactly the measurement Alice performs in teleportation.
 
 ---
 
